@@ -1,0 +1,24 @@
+int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        
+        int n=gas.size();
+        int req=0;
+        int eff=0;
+        int ind=0;
+        int flag=1;
+        for(int i=0;i<n;i++){
+            if(cost[i]>gas[i]+eff){
+                req+=cost[i]-(gas[i]+eff);
+                eff=0;
+                flag=0;
+            }
+            else{
+                eff+=gas[i]-cost[i];
+                if(flag==0){
+                    ind=i;
+                    flag=1;
+                }
+            }
+        }
+        if(eff>=req)return ind;
+        return -1;
+    }
